@@ -7,15 +7,13 @@ var lettersGuessed = "";
 var gameStarted = true;
 var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
     console.log(computerChoice);
+var remainingLetters = computerChoice.length;
 
-  document.onkeyup = function(event){
+  document.onkeyup = function(event) {
  	if (gameStarted === true) {
     
     var userGuess = event.key;
     console.log(userGuess);
-
-    /*var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
-    console.log(computerChoice);*/
 
     var wordLength = computerChoice.length;
     console.log(wordLength);
@@ -26,8 +24,10 @@ var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.
 
     gameStarted = false;
  	console.log(gameStarted);
-} else if (gameStarted = false); {
-	var userGuess = event.key;
+
+} else if (gameStarted === false); {
+	
+    var userGuess = event.key;
     console.log(userGuess);
 
 
@@ -36,20 +36,32 @@ var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.
     	
     	for (var j = 0; j < computerChoice.length; j++) {
 			if (computerChoice[j] === userGuess.toUpperCase()) {
-			 currentWord[j] = userGuess.toUpperCase();
-			 }
+			     currentWord[j] = userGuess.toUpperCase();
+                remainingLetters = remainingLetters -1;
+                console.log(remainingLetters);
+                if (remainingLetters === 0) {
+                    wins = wins + 1;
+                    alert("You win!");
+                    confirm("Click OK to play again!");
+                    gameStarted === true;
+			     }
 			}
-    } else {
-    	console.log('no match');
-
-    	if (lettersGuessed.includes(userGuess)){
+        }
+    } else if (lettersGuessed.includes(userGuess)) {
     		alert('You already guessed that letter.');
-    	} else {
-    		lettersGuessed = lettersGuessed + userGuess + " ";
-    		remainingGuesses = remainingGuesses - 1;
+            console.log('no match');
+    } else if (userGuess === "Shift" ||
+                   userGuess === "Alt" ||
+                   userGuess === "Enter" ||
+                   userGuess === "(" ||
+                   userGuess === ")" ||
+                   userGuess === "|" ||
+                   userGuess === "/") {
+            alert('Please enter a valid letter.');
+    } else {
+        lettersGuessed = lettersGuessed + userGuess + " ";
+        remainingGuesses = remainingGuesses - 1;    
     }
-}
-}
 
     var html = 
     	"<p>Wins: " + wins + "</p>" +
@@ -58,5 +70,5 @@ var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.
     	"<p>Letters Already Guessed: " + lettersGuessed + "</p>";
 
     document.querySelector('#game').innerHTML = html;
-
-  }
+    }
+}
