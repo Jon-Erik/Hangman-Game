@@ -1,7 +1,11 @@
 #game {
 	text-align: center;
+	border: 2px solid black;
+	margin: 10px 0px;
 }
 
 #messagebox {
 	text-align: center;
+	border: 2px solid black;
+	margin: 10px 0px;
 }
