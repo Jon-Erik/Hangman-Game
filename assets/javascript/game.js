@@ -1,11 +1,22 @@
 var computerOptions = ['BACH', 'BEETHOVEN', 'BRAHMS', 'VIVALDI', 'SCHUMANN', 'SCHUBERT'];
+/*var computerOptions = [{
+        "name": "BACH",
+        "image": "bach.jpg"
+    }, {
+        "name": "BEETHOVEN",
+        "image": ""
+    }
+]
+
+var images = ["bach.jpg"];*/
+
 
 var wins = 0;
 var remainingGuesses = 16;
 var currentWord = [];
 var lettersGuessed = "";
 var gameStarted = false;
-var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+var computerChoice = computerOptions[0]//[Math.floor(Math.random() * computerOptions.length)];
     console.log(computerChoice);
 var remainingLetters = computerChoice.length;
 var alreadyGuessed = "You already guessed that letter.";
@@ -54,6 +65,11 @@ var html = function() {
 
     var userGuess = event.key;
     console.log('user guess is ' + userGuess);
+    if (remainingGuesses === 0) {
+        return;
+    }
+
+
 
     if (alphabet.includes(userGuess.toUpperCase())) {
             //document.querySelector('#messagebox').innerHTML = 
@@ -75,10 +91,11 @@ var html = function() {
                 'Match!';
 
                 if (remainingGuesses === 0) {
-                    //document.querySelector('#game').innerHTML = 
-                    //"Game Over! Total wins: " + wins;
-                    //document.querySelector('#messagebox').innerHTML = 
-                   // "Thanks for playing! Refresh the page to start over";
+                    document.querySelector('#game').innerHTML = 
+                    "Game Over! Total wins: " + wins;
+                    document.querySelector('#messagebox').innerHTML = 
+                    "Thanks for playing! Refresh the page to start over";
+                    return;
                 } else {
                     for (var j = 0; j < computerChoice.length; j++) {
                 		if (computerChoice[j] === userGuess.toUpperCase()) {
@@ -127,6 +144,7 @@ var html = function() {
                                     console.log(computerChoice);
                                     lettersGuessed = "";
                                     remainingLetters = computerChoice.length;
+                                    break;
                                 }
                             }
         			     }
