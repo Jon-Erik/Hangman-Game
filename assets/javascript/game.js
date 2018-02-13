@@ -1,17 +1,17 @@
-var computerOptions = ['BACH', 'BEETHOVEN', 'BRAHMS', 'VIVALDI', 'SCHUMANN', 'SCHUBERT'];
+var computerOptions = ['BACH', 'BEETHOVEN', 'BRAHMS', 'VIVALDI', 'SCHUMANN', 'SCHUBERT', 'SCRIABIN'];
 
 var images = ["assets/images/Johann_Sebastian_Bach.jpg", "assets/images/beethoven.jpg", "assets/images/JohannesBrahms.jpg", "assets/images/vivaldi.jpg", 
-              "assets/images/Schumann.jpg", "assets/images/schubert.jpg"];
+              "assets/images/Schumann.jpg", "assets/images/schubert.jpg", "assets/images/scriabin.jpg"];
 
 var captions = ["Johann Sebastian Bach, 1685-1750", "Ludwig van Beethoven, 1770-1827", "Johannes Brahms, 1833-1897", "Antonio Vivaldi, 1678-1741",
-                "Robert Schumann, 1810-1856", "Franz Schubert, 1797-1828"]
+                "Robert Schumann, 1810-1856", "Franz Schubert, 1797-1828", "Alexander Scriabin, 1871-1915"]
 
 var wins = 0;
 var remainingGuesses = 10;
 var currentWord = [];
 var lettersGuessed = "";
 var gameStarted = false;
-var computerChoice = computerOptions[0]//[Math.floor(Math.random() * computerOptions.length)];
+var computerChoice = computerOptions[6]//[Math.floor(Math.random() * computerOptions.length)];
 var remainingLetters = computerChoice.length;
 var alreadyGuessed = "You already guessed that letter.";
 var winMessage = "You win! Press any key to play again";
@@ -80,87 +80,41 @@ document.onkeyup = function(event) {
                     document.querySelector('#messagebox').innerHTML = 
                     'Match!';
 
-                    //} else {
-                        for (var j = 0; j < computerChoice.length; j++) {
-                    		if (computerChoice[j] === userGuess.toUpperCase()) {
-                                currentWord[j] = userGuess.toUpperCase();
-                                remainingLetters = remainingLetters -1;
-                                console.log('remaining letters: ' + remainingLetters);
-                                if (remainingLetters === 0) {
-                                    wins = wins + 1;
-                                    document.querySelector('#messagebox').innerHTML = 
-                                    winMessage;
-                                    winContent = true;
-                                    if (winContent && computerChoice[0]) {
-                                        winInfo(0);
-                                    } else if (winContent && computerChoice === 'BEETHOVEN') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/beethoven.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Ludwig van Beethoven, 1770-1827";
-                                    } else if (winContent && computerChoice === 'BRAHMS') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/JohannesBrahms.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Johannes Brahms, 1833-1897";
-                                    } else if (winContent && computerChoice === 'SCHUBERT') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/schubert.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Franz Schubert, 1797-1828";
-                                    } else if (winContent && computerChoice === 'SCHUMANN') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/Schumann.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Robert Schumann, 1810-1856";
-                                    } else if (winContent && computerChoice === 'VIVALDI') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/vivaldi.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Antonio Vivaldi, 1678-1741";
-                                    }
-                                    /*if (winContent && computerChoice === 'BACH') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/Johann_Sebastian_Bach.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Johann Sebastian Bach, 1685-1750";
-                                    } else if (winContent && computerChoice === 'BEETHOVEN') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/beethoven.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Ludwig van Beethoven, 1770-1827";
-                                    } else if (winContent && computerChoice === 'BRAHMS') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/JohannesBrahms.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Johannes Brahms, 1833-1897";
-                                    } else if (winContent && computerChoice === 'SCHUBERT') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/schubert.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Franz Schubert, 1797-1828";
-                                    } else if (winContent && computerChoice === 'SCHUMANN') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/Schumann.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Robert Schumann, 1810-1856";
-                                    } else if (winContent && computerChoice === 'VIVALDI') {
-                                        document.getElementById("image").setAttribute
-                                        ("src", "assets/images/vivaldi.jpg");
-                                        document.querySelector('#caption').innerHTML = 
-                                        "Antonio Vivaldi, 1678-1741";
-                                    }*/
-                                    gameStarted = false;
-                                    currentWord = [];
-                                    computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
-                                    console.log(computerChoice);
-                                    lettersGuessed = "";
-                                    remainingLetters = computerChoice.length;
-                                    break;
+                    for (var j = 0; j < computerChoice.length; j++) {
+                    	if (computerChoice[j] === userGuess.toUpperCase()) {
+                            currentWord[j] = userGuess.toUpperCase();
+                            remainingLetters = remainingLetters -1;
+                            console.log('remaining letters: ' + remainingLetters);
+                            if (remainingLetters === 0) {
+                                wins = wins + 1;
+                                document.querySelector('#messagebox').innerHTML = 
+                                winMessage;
+                                winContent = true;
+                                if (winContent && computerChoice === 'BACH') {
+                                    winInfo(0);
+                                } else if (winContent && computerChoice === 'BEETHOVEN') {
+                                    winInfo(1);
+                                } else if (winContent && computerChoice === 'BRAHMS') {
+                                    winInfo(2);
+                                } else if (winContent && computerChoice === 'VIVALDI') {
+                                    winInfo(3);
+                                } else if (winContent && computerChoice === 'SCHUMANN') {
+                                    winInfo(4);
+                                } else if (winContent && computerChoice === 'SCHUBERT') {
+                                    winInfo(5);
+                                } else if (winContent && computerChoice === 'SCRIABIN') {
+                                    winInfo(6);
                                 }
+                                gameStarted = false;
+                                currentWord = [];
+                                computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+                                console.log(computerChoice);
+                                lettersGuessed = "";
+                                remainingLetters = computerChoice.length;
+                                break;
                             }
-            			}
-                    //}
+                        }
+            		}
                 }
             } else if (lettersGuessed.includes(userGuess)) {
                     document.querySelector('#messagebox').innerHTML = 
