@@ -11,7 +11,7 @@ var remainingGuesses = 10;
 var currentWord = [];
 var lettersGuessed = "";
 var gameStarted = false;
-var computerChoice = computerOptions[6]//[Math.floor(Math.random() * computerOptions.length)];
+var computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
 var remainingLetters = computerChoice.length;
 var alreadyGuessed = "You already guessed that letter.";
 var winMessage = "You win! Press any key to play again";
@@ -56,7 +56,7 @@ document.onkeyup = function(event) {
 
     document.querySelector('#caption').innerHTML = "Who could it be?";
 
-    document.querySelector('#messagebox').innerHTML = "Press a letter to starting guessing again";
+    document.querySelector('#messagebox').innerHTML = "Press a letter to starting guessing";
 
     return;
 
