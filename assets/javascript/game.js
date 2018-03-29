@@ -20,6 +20,7 @@ var winContent = false;
 var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
+//A function to display an image of a composer and caption when the user completes a word. 
 var winInfo = function(i) {
     document.getElementById("image").setAttribute
     ("src", images[i]);
@@ -27,6 +28,7 @@ var winInfo = function(i) {
     captions[i];
 }
 
+//A functin to display necessary information during game play
 var html = function() {
         
         var gameDisplay = "<p>Wins: " + wins + "</p>" +
@@ -37,8 +39,10 @@ var html = function() {
     document.querySelector('#game').innerHTML = gameDisplay;
 }
 
+//All events in the game are initiated by key up events.
 document.onkeyup = function(event) {
 
+    //Code until the "return" sets up the game. A word is picked randomly from an array and blanks appear on the screen along with a prompt to begin guessing letters.
     if (gameStarted === false) {
         var userGuess = event.key;
 
@@ -65,11 +69,14 @@ document.onkeyup = function(event) {
         var userGuess = event.key;
         console.log('user guess is ' + userGuess);
 
+        //Checks to see if user guess is a valid letter
         if (alphabet.includes(userGuess.toUpperCase())) {
 
+            //Checks to see if user guess is included in the randomly picked word
             if (computerChoice.includes(userGuess.toUpperCase())) {
             	console.log('match');
             	
+                //Checks to see if user has already guessed the letter
                 if (lettersGuessed.includes(userGuess)) {
                     document.querySelector('#messagebox').innerHTML = 
                     alreadyGuessed;
@@ -80,11 +87,13 @@ document.onkeyup = function(event) {
                     document.querySelector('#messagebox').innerHTML = 
                     'Match!';
 
+                    //Checks to see where the user guess matches the letters in the word
                     for (var j = 0; j < computerChoice.length; j++) {
                     	if (computerChoice[j] === userGuess.toUpperCase()) {
                             currentWord[j] = userGuess.toUpperCase();
                             remainingLetters = remainingLetters -1;
                             console.log('remaining letters: ' + remainingLetters);
+                            //Checks to see if there are any more remaining letters to be guessed. If none remain, the user scores a win and a picture of the composer is displayed.
                             if (remainingLetters === 0) {
                                 wins = wins + 1;
                                 document.querySelector('#messagebox').innerHTML = 
